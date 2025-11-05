@@ -3,7 +3,7 @@
 ################################################################################
 module "nullplatform_code_repository" {
   source                      = "git::https://github.com/nullplatform/tofu-modules.git//nullplatform/code_repository?ref=v1.4.0"
-  np_api_key                  = var.np_api_key
+  np_api_key                  = var.account_level_np_api_key
   nrn                         = var.account_level_nrn
   git_provider                = "gitlab"
   gitlab_group_path           = var.gitlab_group_path
@@ -21,7 +21,7 @@ module "nullplatform_cloud_provider" {
   source                            = "git::https://github.com/nullplatform/tofu-modules.git//nullplatform/cloud/azure/cloud?ref=feature/aro"
   nrn                               = var.account_level_nrn
   application_domain                = var.application_domain
-  np_api_key                        = var.np_api_key
+  np_api_key                        = var.account_level_np_api_key
   domain_name                       = var.domain_name
   dimensions                        = var.dimensions
   azure_resource_group_name         = var.public_dns_azure_resource_group_name
@@ -37,7 +37,7 @@ module "nullplatform_cloud_provider" {
 module "nullplatform_asset_repository" {
   source       = "git::https://github.com/nullplatform/tofu-modules.git//nullplatform/asset/docker_server?ref=v1.4.0"
   nrn          = var.account_level_nrn
-  np_api_key   = var.np_api_key
+  np_api_key   = var.account_level_np_api_key
   login_server = var.login_server
   username     = var.username
   password     = var.password
@@ -49,7 +49,7 @@ module "nullplatform_asset_repository" {
 ################################################################################
 module "nullplatform_dimension" {
   source       = "git::https://github.com/nullplatform/tofu-modules.git//nullplatform/dimensions?ref=v1.4.0"
-  np_api_key   = var.np_api_key
+  np_api_key   = var.account_level_np_api_key
   nrn          = var.account_level_nrn
   environments = var.environments
 }
@@ -59,26 +59,26 @@ module "nullplatform_dimension" {
 ################################################################################
 module "nullplatform_aro_cluster_base_chart" {
   source                         = "git::https://github.com/nullplatform/tofu-modules.git//nullplatform/base?ref=feature/aro"
-  np_api_key                     = var.np_api_key
+  np_api_key                     = var.account_level_np_api_key
   nrn                            = var.account_level_nrn
   cloud_provider                 = "aro"
 
   nullplatform_base_helm_version = local.nullplatform_base_helm_version
-#  exporter_prometheus_port       = var.exporter_prometheus_port
+  #  exporter_prometheus_port       = var.exporter_prometheus_port
   ingressControllers = {
-        public = {
-          name    = "internet-facing"
-          enabled = true
-          scope   = "External"
-          domain  = "poc-movistar.nullapps.io"
-        }
-        private = {
-          name    = "internal"
-          enabled = true
-          scope   = "Internal"
-          domain  = "poc-movistar-internal.nullapps.io"
-        }
-      }
+    public = {
+      name    = "internet-facing"
+      enabled = true
+      scope   = "External"
+      domain  = "poc-movistar.nullapps.io"
+    }
+    private = {
+      name    = "internal"
+      enabled = true
+      scope   = "Internal"
+      domain  = "poc-movistar-internal.nullapps.io"
+    }
+  }
 }
 
 ###############################################################################
