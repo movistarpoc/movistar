@@ -1,0 +1,131 @@
+################################################################################
+# CONFIGURATION CHECKLIST - Values to Fill
+################################################################################
+#
+# Azure Subscription & Resource Groups (7 values - Client):
+#   - azure_resource_group_name      : Resource group for cluster and public DNS
+#   - azure_subscription_id          : Azure subscription UUID
+#   - azure_tenant_id                : Azure tenant UUID
+#   - azure_client_id                : Service principal client ID
+#   - azure_client_secret            : Service principal secret
+#   - public_scope_domain_name       : Public scope domain
+#   - private_scope_domain_name      : Private scope domain
+#
+# DNS Configuration (1 value - Client):
+#   - private_dns_azure_resource_group_name : Resource group for private DNS
+#
+# Azure Container Registry / Harbor (4 values - Client):
+#   - containerregistry_name         : Harbor registry name (unique, lowercase, 5-50 chars)
+#   - username                       : Harbor registry username
+#   - password                       : Harbor registry password
+#   - login_server                   : Harbor registry server URL
+#   - path                           : Repository path in Harbor
+#
+# Nullplatform Configuration (2 values - Nullplatform provides):
+#   - np_api_key                     : API key at org level with all permissions
+#   - account_level_nrn              : Account level NRN
+#
+# GitLab Configuration (2 values - Client):
+#   - gitlab_access_token            : GitLab access token
+#   - gitlab_group_path              : GitLab group path
+#
+# ARO Cluster Configuration (1 value - Client):
+#   - cluster_name                   : ARO cluster name
+#
+################################################################################
+
+################################################################################
+# Azure Subscription & Resource Groups
+################################################################################
+
+# Resource group name for cluster and public DNS
+# ⚠️ Client: crear y configurar resource group name donde está el cluster y el DNS publico
+azure_resource_group_name      = "..."
+azure_subscription_id          = "..."
+azure_tenant_id                = "..."
+azure_client_id                = "..."
+azure_client_secret            = "..."
+
+public_scope_domain_name       = "..."
+private_scope_domain_name      = "..."
+
+################################################################################
+# DNS Configuration (Public & Private)
+################################################################################
+
+# ⚠️ Client: crear y configurar resource group name donde está el DNS privado
+# (puede ser el mismo que para el resto de los recursos)
+private_dns_azure_resource_group_name = "..."
+
+# ⚠️ Client: Crear las zonas de DNS privadas y publicas y pasar a nullplatform los DNS
+# servers para hacer la delegación de dominio
+# ⚠️ nullplatform: delegar este subdominio
+domain_name = "client-slug.nullapps.io"
+
+################################################################################
+# Azure Container Registry
+################################################################################
+
+# Harbor Container Registry name (must be globally unique, lowercase, 5–50 alphanumeric)
+containerregistry_name = "..."
+
+# Harbor image registry credentials
+username     = "..."
+password     = "..."
+login_server = "..."
+path         = "..."
+
+################################################################################
+# Nullplatform Configuration
+################################################################################
+
+# Nullplatform credentials (np_api_key at org level with all permissions)
+np_api_key        = "<provider-by-nullplatform>"
+account_level_nrn = "<provider-by-nullplatform>"
+
+# Dimensions and environments
+dimensions = {
+  environment = "development"
+}
+
+environments = [
+  "Development",
+  "Staging",
+  "Production"
+]
+
+# Agent tags selectors
+tags_selectors = {
+  "environment" : "development"
+}
+
+################################################################################
+# GitLab Configuration
+################################################################################
+
+gitlab_access_token      = "..."
+gitlab_group_path        = "..."
+gitlab_installation_url  = "https://gitlab.com"
+gitlab_repository_prefix = "aro"
+gitlab_slug              = "aro"
+
+# GitLab collaborators (currently empty)
+gitlab_collaborators_config = {
+  collaborators = []
+}
+
+################################################################################
+# Overrides Configuration
+################################################################################
+enabled_override       = true
+overrides_service_path = "/azure-aro"
+override_repo_path     = "/root/.np/nullplatform/scopes"
+
+################################################################################
+# ARO Cluster Configuration
+################################################################################
+cluster_name = "..."
+
+################################################################################
+# Monitoring Configuration
+################################################################################
