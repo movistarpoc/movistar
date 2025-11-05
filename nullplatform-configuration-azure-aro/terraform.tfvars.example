@@ -21,8 +21,9 @@
 #   - login_server                   : Harbor registry server URL
 #   - path                           : Repository path in Harbor
 #
-# Nullplatform Configuration (2 values - Nullplatform provides):
+# Nullplatform Configuration (3 values - Nullplatform provides):
 #   - np_api_key                     : API key at org level with all permissions
+#   - account_level_np_api_key       : API key at account level with all permissions
 #   - account_level_nrn              : Account level NRN
 #
 # GitLab Configuration (2 values - Client):
@@ -40,14 +41,17 @@
 
 # Resource group name for cluster and public DNS
 # ⚠️ Client: crear y configurar resource group name donde está el cluster y el DNS publico
-azure_resource_group_name      = "..."
-azure_subscription_id          = "..."
-azure_tenant_id                = "..."
-azure_client_id                = "..."
-azure_client_secret            = "..."
+azure_resource_group_name         = "..."
+azure_subscription_id             = "..."
+azure_tenant_id                   = "..."
+azure_client_id                   = "..."
+azure_service_principal_object_id = "..."
+azure_client_secret               = "..."
 
-public_scope_domain_name       = "..."
-private_scope_domain_name      = "..."
+public_scope_domain_name  = "..."
+private_scope_domain_name = "..."
+
+application_domain = false
 
 ################################################################################
 # DNS Configuration (Public & Private)
@@ -55,11 +59,14 @@ private_scope_domain_name      = "..."
 
 # ⚠️ Client: crear y configurar resource group name donde está el DNS privado
 # (puede ser el mismo que para el resto de los recursos)
+
 private_dns_azure_resource_group_name = "..."
+public_dns_azure_resource_group_name  = "..."
 
 # ⚠️ Client: Crear las zonas de DNS privadas y publicas y pasar a nullplatform los DNS
 # servers para hacer la delegación de dominio
 # ⚠️ nullplatform: delegar este subdominio
+
 domain_name = "client-slug.nullapps.io"
 
 ################################################################################
@@ -80,8 +87,9 @@ path         = "..."
 ################################################################################
 
 # Nullplatform credentials (np_api_key at org level with all permissions)
-np_api_key        = "<provider-by-nullplatform>"
-account_level_nrn = "<provider-by-nullplatform>"
+np_api_key               = "<provided-by-nullplatform>"
+account_level_np_api_key = "<provided-by-nullplatform>"
+account_level_nrn        = "<provided-by-nullplatform>"
 
 # Dimensions and environments
 dimensions = {
@@ -129,3 +137,5 @@ cluster_name = "..."
 ################################################################################
 # Monitoring Configuration
 ################################################################################
+# Prometheus exporter port
+exporter_prometheus_port = "2025"
