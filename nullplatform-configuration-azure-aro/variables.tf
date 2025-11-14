@@ -246,3 +246,13 @@ variable "application_domain" {
 }
 
 
+###########prometheus###########
+ variable "install_prometheus" {
+  default = false
+   
+ }
+ variable "prometheus_url" {
+  type = string
+  default = "http://prometheus-k8s.openshift-monitoring.svc.cluster.local:9091"
+   
+ }
